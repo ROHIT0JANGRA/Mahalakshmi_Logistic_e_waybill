@@ -1,0 +1,115 @@
+﻿@model Mahalakshmi_Logistic_Pvt_Ltd.Models.PartMaster.AddParts
+
+@{
+    ViewBag.Title = "PartsListAsync";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<div class="col-4">
+    <h2 class="page-header">Part List</h2>
+</div>
+<div class="col-4 pull-right">
+    <a href="@Url.Action("CreateParts", "PartMaster")" class="page-header"><i class="fa fa-plus-circle"></i>Add New</a>
+</div>
+<div class="row">
+    <div class="panel panel-primary col-lg-12">
+
+        <div class="table-responsive" style="height:400px">
+
+            <table class="table">
+                <thead style="background-color:dimgray;color:white;padding:1em;">
+
+                    <tr class="bg-secondary">
+                        <th>
+                            Category
+                        </th>
+                        <th>
+                            Equipment Id
+                        </th>
+                        <th>
+                            Weight(KG)
+                        </th>
+                        <th>
+                            Volume Weight
+                        </th>
+                        <th>
+                            Price Per Unit
+                        </th>
+                        <th>
+                            Pocket Quantity
+                        </th>
+                        <th>
+                            GSM
+                        </th>
+                        <th>
+                            Color
+                        </th>
+                        <th>
+                            Thickness
+                        </th>
+                        <th>
+                            Stock Alert
+                        </th>
+                        <th>
+                            Alias
+                        </th>
+                        <th>Edit|Delete/View</th>
+                    </tr>
+
+                </thead>
+                @foreach (var item in ViewBag.PartsList)
+                {
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                @item.Category
+                            </td>
+                            <td>
+                                @item.Part_number
+                            </td>
+                            <td>
+                                @item.Weight
+                            </td>
+                            <td>
+                                @item.Volume_Weight
+                            </td>
+                            <td>
+                                @item.Purchase_price
+                            </td>
+                            <td>
+                                @item.Pocket_qty
+                            </td>
+                            <td>
+                                @item.Gsm
+                            </td>
+                            <td>
+                                @item.Color
+                            </td>
+                            <td>
+                                @item.Thickness
+                            </td>
+                            <td>
+                                @item.Stock_Alert
+                            </td>
+                            <td>
+                                @item.Alias
+                            </td>
+                            <td>
+                                <a href="@Url.Action("EditCustomer", "PartMaster", new { id = @item.Id })"><i class="fa fa-edit"></i></a> |
+                                <a href="@Url.Action("DeleteCustomer","PartMaster", new { id = @item.Id })" style="color:red"><i class="fa fa-trash-o bg-danger "></i></a>
+                                <a href="@Url.Action("Details","PartMaster", new { id = @item.Id })" style="color:deepskyblue"><i class="fa fa-eye-slash bg-primary "></i></a>
+
+                            <td>
+                        </tr>
+                    </tbody>
+                }
+
+
+            </table>
+        </div>
+
+    </div>
+</div>
+

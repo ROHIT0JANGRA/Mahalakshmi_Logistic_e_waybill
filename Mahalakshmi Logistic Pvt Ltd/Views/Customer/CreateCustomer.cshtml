@@ -1,0 +1,470 @@
+﻿    @model Mahalakshmi_Logistic_Pvt_Ltd.Models.Customers.Customer
+@{
+    ViewBag.Title = "CreateCustomer";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+
+
+
+</script>
+<style>
+    .dtHorizontalExampleWrapper {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    #dtHorizontalExample th, td {
+        white-space: nowrap;
+    }
+
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting:before,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_asc:before,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_asc_disabled:before,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_desc:before,
+    table.dataTable thead .sorting_desc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:before {
+        bottom: .5em;
+    }
+</style>
+
+<div class="page-header pull-right"><a href="@Url.Action("CustomerList","Customer")"><i class="fa fa-list">List</i> </a></div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Customer Details
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    
+                    <form method="post">
+                        <div class="col-lg-6">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-asterisk"></i> </span>
+                                <input  class="form-control" id="mydate" is-accept-old-day="false" disabled name="created_date" type="date" value="mydate" />
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-asterisk"></i> </span>
+                                @*<input type="text"  placeholder="" class="form-control" name="status" value="Active" disabled />*@
+                                <select class="form-control" name="status">
+                                    <option selected value="Active">Active</option>
+                                    <option value="InActive">InActive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-asterisk"></i> </span>
+                                <input type="text" placeholder="Customer Name" class="form-control" name="c_name" required />
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i> </span>
+                                <input type="email" placeholder="Customer Email" class="form-control" name="c_email" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-mobile-phone"></i> </span>
+                                <input type="number" class="form-control" placeholder="Contact No" name="c_mobile">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-mail-reply-all"></i> </span>
+                                <input type="text" name="c_pan_no" class="form-control" placeholder="Pan No" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i> </span>
+                                <select class="form-select form-control" name="branch_id" required>
+                                    <option selected>--Select Branch-- </option>
+                                    @foreach (var item in ViewBag.branchList)
+                                    {
+                                        <option value="@item.Id">@item.Branch_name</option>
+
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-code"></i> </span>
+                                <input name="gstin" type="text" placeholder="Gst No" class="form-control" />
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12">
+                            <div class="panel tabbed-panel panel-primary">
+                                <div class="panel-heading clearfix">
+                                    @*<div class="panel-title pull-left">Tabbed Panel Primary</div>*@
+                                    <div class="pull-left">
+                                        <ul class="nav nav-tabs" style="font-size:11px">
+                                            <li><a href="#tab-primary-1" data-toggle="tab">COSTOMER CONTACT</a></li>
+                                            <li><a href="#tab-primary-2" data-toggle="tab">REGISTERED ADDRESS</a></li>
+                                            <li><a href="#tab-primary-3" data-toggle="tab">SHIPPING ADDRESS</a></li>
+                                            @*<li><a href="#tab-primary-5" data-toggle="tab">Payment Run</a></li>*@
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active horizontal-scrollable" id="tab-primary-1" style="overflow-y: auto">
+                                            <div class="container ">
+                                                <table id="dtHorizontalExample" class="table table-responsive table-striped table-bordered table-sm" cellspacing="0" style="width:100%">
+                                                    <thead class="bg-dark">
+                                                        <tr>
+
+                                                            <th>Name</th>
+                                                            <th>
+                                                                Designation
+                                                            </th>
+                                                            <th>Contact No</th>
+                                                            <th>Email</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <input type="text" name="contact_name" class="form-control" placeholder="Name" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" name="contact_designation" class="form-control" placeholder="Designation" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" name="contact_no" class="form-control" placeholder="Contact No" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="email" name="contact_email" class="form-control" placeholder="Eamil" />
+                                                            </td>
+
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+                                        </div>
+
+                                        @* Tab Second *@
+                                        <div class="tab-pane fade" id="tab-primary-2">
+
+                                            <div class="col-lg-4">
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="textAreaExample3">State</label>
+
+                                                    <select class="form-control" id="state_input" name="cors_state" onchange="populateStates(this.id,'district_input')" required>
+                                                        <option value="">--Select State--</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="textAreaExample3">Distict</label>
+
+                                                    <select class="form-select form-control" id="district_input" name="cors_district" required>
+                                                        <option selected>--Select District--</option>
+                                                        <option value=""></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="textAreaExample3">City</label>
+                                                    <input class="form-select form-control" type="text" name="cors_city">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="textAreaExample3">PinCode</label>
+                                                    <input class="form-select form-control" type="text" name="cors_pincode">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="textAreaExample3">Address</label>
+                                                    <textarea class="form-control" name="cors_address" id="textAreaExample3" rows="2"></textarea>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="tab-primary-3">
+                                            <div>
+
+                                                <div class="col-lg-4">
+                                                    <div class="form-group ">
+                                                        <label class="control-label" for="inputSuccess">State</label>
+
+                                                        <select class="form-control" id="state_inputs" name="ship_state" onchange="populateStatesship(this.id,'district_inputs')">
+                                                            <option value="">--Select State--</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group ">
+                                                        <label class="control-label" for="inputSuccess">District</label>
+
+                                                        <select class="form-select form-control" id="district_inputs" name="ship_district">
+                                                            <option selected>--Select District--</option>
+                                                            <option value=""></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="inputSuccess">City</label>
+                                                        <input type="text" class="form-control" name="ship_city" placeholder="City" id="inputSuccess">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div>
+
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="inputSuccess">Shipping PinCode</label>
+                                                        <input type="text" class="form-control" name="ship_pincode" placeholder="Pincode" id="inputSuccess">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="inputSuccess">Shipping Address</label>
+                                                        <input type="text" class="form-control" placeholder="Address" name="ship_address" id="inputSuccess">
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+
+
+                        <div align="center" class="col-lg-12">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+                            <button type="reset" class="btn btn-warning"><i class="fa fa-refresh"></i> Reset</button>
+                        </div>
+
+                    </form>
+                </div>
+                <!-- /.col-lg-6 (nested) -->
+            </div>
+            <!-- /.row (nested) -->
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+</div>
+
+
+
+@*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*@
+
+<script>
+
+    var states_arr = new Array("Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Lakshadweep", "Pondicherry");
+
+    var district_arr = new Array();
+
+    district_arr[0] = "";
+
+    district_arr[1] = "Anantapur|Chittoor|Cuddapah|East Godavari|Guntur|Krishna|Kurnool|Nellore|Prakasam|Srikakulam|Vishakapatnam|Vizianagaram|West Godavari";
+
+    district_arr[2] = "Anjaw|Changlang|Dibang Valley|East Kameng|East Siang|Kra Daadi|Kurung Kumey|Lohit|Longding|Lower Dibang Valley|Lower Subansiri|Namsai|Papum Pare|Siang|Tawang|Tirap|Upper Siang|Upper Subansiri|West Kameng|West Siang";
+
+    district_arr[3] = "Baksa|Barpeta|Bongaigaon|Cachar|Chirang|Darrang|Dhemaji|Dhubri|Dibrugarh|Dima Hasao|Goalpara|Golaghat|Hailakandi|Jorhat|Kamrup M|Kamrup R|Karbi Anglong|Karimganj|Kokrajhar|Lakhimpur|Marigaon|Nagaon|Nalbari|Sibsagar|Sonitpur|Tinsukia|Udalguri";
+
+    district_arr[4] = "Araria|Arwal|Aurangabad|Banka|Begusarai|Bhagalpur|Bhojpur|Buxar|Darbhanga|East Champaran|Gaya|Gopalganj|Jamui|Jehanabad|Kaimur Bhabua|Katihar|Khagaria|Kishanganj|Lakhisarai|Madhepura|Madhubani|Munger|Muzaffarpur|Nalanda|Nawada|Patna|Purnia|Rohtas|Saharsa|Samastipur|Saran|Sheikhpura|Sheohar|Sitamarhi|Siwan|Supaul|Vaishali|West Champaran";
+
+    district_arr[5] = "Balod|Baloda Bazar|Balrampur|Bastar|Bemetra|Bijapur|Bilaspur|Dantewada|Dhamtari|Durg|Gariyaband|Janjgir Champa|Jashpur|Kanker|Kawardha|Kondagaon|Korba|Koriya|Mahasamund|Mungeli|Narayanpur|Raigarh|Raipur|Rajnandgaon|Sukma|Surajpur|Surguja";
+
+    district_arr[6] = "North Goa|South Goa";
+
+    district_arr[7] = "Ahmedabad|Amreli|Anand|Aravalli|Banas Kantha|Bharuch|Bhavnagar|Botad|Chhotaudepur|Dahod|Devbhumi Dwarka|Gandhinagar|Gir Somnath|Jamnagar|Junagadh|Kachchh|Kheda|Mahesana|Mahisagar|Morbi|Narmada|Navsari|Panch Mahals|Patan|Porbandar|Rajkot|Sabar Kantha|Surat|Surendranagar|Tapi|The Dangs|Vadodara|Valsad";
+
+    district_arr[8] = "Ambala|Bhiwani|Faridabad|Fatehabad|Gurgaon|Hisar|Jhajjar|Jind|Kaithal|Karnal|Kurukshetra|Mahendragarh|Mewat|Palwal|Panchkula|Panipat|Rewari|Rohtak|Sirsa|Sonipat|Yamunanagar";
+
+    district_arr[9] = "Bilaspur|Chamba|Hamirpur|Kangra|Kinnaur|Kullu|Lahul Spiti|Mandi|Shimla|Sirmaur|Solan|Una";
+
+    district_arr[10] = "Anantnag|Badgam|Bandipora|Baramula|Doda|Ganderbal|Jammu|Kargil|Kathua|Kishtwar|Kulgam|Kupwara|Leh Ladakh|Poonch|Pulwama|Rajouri|Ramban|Reasi|Samba|Shopian|Srinagar|Udhampur";
+
+    district_arr[11] = "Bokaro|Chatra|Deoghar|Dhanbad|Dumka|Garhwa|Giridih|Godda|Gumla|Hazaribagh|Jamtara|Khunti|Kodarma|Latehar|Lohardaga|Pakaur|Palamu|Pashchimi Singhbhum|Purbi Singhbhum|Ramgarh|Ranchi|Sahibganj|Saraikela|Simdega";
+
+    district_arr[12] = "Bagalkote|Bangalore Rural|Bangalore Urban|Belgaum|Bellary|Bidar|Bijapur|Chamrajnagar|Chikkaballapur|Chikmagalur|Chitradurga|Dakshina Kannada|Davanagere|Dharwad|Gadag|Gulbarga|Hassan|Hospet|Haveri|Kodagu|Kolar|Koppal|Mandya|Mysore|Raichur|Ramanagar|Shimoga|Tumkur|Udupi|Uttara Kannada|Yadgir";
+
+    district_arr[13] = "Alappuzha|Ernakulam|Idukki|Kannur|Kasaragod|Kollam|Kottayam|KOZHIKKODE|Malappuram|Palakkad|Pathanamthitta|Thiruvananthapuram|Thrissur|Wayanad";
+
+    district_arr[14] = "Agar Malwa|Alirajpur|Anuppur|Ashok Nagar|Balaghat|Barwani|Betul|Bhind|Bhopal|Burhanpur|Chhatarpur|Chhindwada|Damoh|Datia|Dewas|Dhar|Dindori|Guna|Gwalior|Harda|Hoshangabad|Indore|Jabalpur|Jhabua|Katni|Khandwa|Khargone|Mandla|Mandsaur|Mandideep|Morena|Narsinghpur|Neemuch|Panna|Pithampur|Raisen|Rajgarh|Ratlam|Rewa|Sagar|Satna|Sehore|Seoni|Shahdol|Shajapur|Sheopur|Shivpuri|Sidhi|Singroli|Tikamgarh|Ujjain|Umaria|Vidisha";
+
+    district_arr[15] = "Ahmednagar|Akola|Amravati|Aurangabad|Bhandara|Bhiwandi|Bid|Brihan Mumbai|Buldana|Chandrapur|Dhule|Gadchiroli|Gondiya|Hingoli|Jalgaon|Jalna|Kolhapur|Latur|Nagpur|Nanded|Nandurbar|Nashik|Osmanabad|Palghar|Parbhani|Pune|Raigarh|Ratnagiri|Sangli|Satara|Sindhudurg|Solapur|Thane|Wardha|Washim|Yavatmal";
+
+    district_arr[16] = "Bishnupur|Chandel|Churachandpur|Imphal East|Imphal West|Senapati|Tamenglong|Thoubal|Ukhrul";
+
+    district_arr[17] = "East Garo Hills|East Jaintia Hills|East Khasi Hills|North Garo Hills|Ri Bhoi|South Garo Hills|South West Garo Hills|South West Khasi Hills|West Garo Hills|West Jaintia Hills|West Khasi Hills";
+
+    district_arr[18] = "Aizawl East|Aizawl West|Champhai|Kolasib|Lawngtlai|Lunglei|Mamit|Saiha|Serchhip";
+
+    district_arr[19] = "Dimapur|Kiphire|Kohima|Longleng|Mokokchung|Mon|Peren|Phek|Tuensang|Wokha|Zunheboto";
+
+    district_arr[20] = "Anugul|Balangir|Baleshwar|Bargarh|Baudh|Bhadrak|Cuttack|Deogarh|Dhenkanal|Gajapati|Ganjam|Jagatsinghpur|Jajapur|Jharsuguda|Kalahandi|Kandhamal|Kendrapara|Keonjhar|Khordha|Koraput|Malkangiri|Mayurbhanj|Nabarangapur|Nayagarh|Nuapada|Puri|Rayagada|Sambalpur|Sonapur|Sundargarh";
+
+
+    district_arr[21] = "Amritsar|Barnala|Bathinda|Faridkot|Fatehgarh Sahib|Fazilka|Firozpur|Gurdaspur|Hoshiarpur|Jalandhar|Kapurthala|Ludhiana|Mansa|Moga|Mohali SAS Nagar|Muktsar|Nawanshahr|Pathankot|Patiala|Rupnagar|Sangrur|Tarn Taran";
+
+    district_arr[22] = "Ajmer|Alwar|Banswara|Baran|Barmer|Bharatpur|Bhilwara|Bikaner|Bundi|Chittaurgarh|Churu|Dausa|Dhaulpur|Dungarpur|Ganganagar|Hanumangarh|Jaipur|Jaisalmer|Jalor|Jhalawar|Jhunjhunun|Jodhpur|Karauli|Kota|Nagaur|Pali|Pratapgarh|Rajsamand|Sawai Madhopur|Sikar|Sirohi|Tonk|Udaipur";
+
+    district_arr[23] = "East|North|South|West";
+
+    district_arr[24] = "Ariyalur|Chennai|Coimbatore|Cuddalore|Dharmapuri|Dindigul|Erode|Kancheepuram|Kanniyakumari|Karur|Krishnagiri|Madurai|Nagapattinam|Namakkal|Nilgiris|Perambalur|Pudukkottai|Ramanathapuram|Salem|Sivaganga|Thanjavur|Theni|Thiruvallur|Thiruvarur|Tiruchirappalli|Tirunelveli|Tirupur|Tiruvanamalai|Toothukudi|Vellore|Viluppuram|Virudhunagar";
+
+    district_arr[25] = "Adilabad|Hyderabad|Karim Nagar|Khammam|Mahbubnagar|Medak|Nalgonda|Nizamabad|Ranga Reddy|Warangal Urban|Zaherabad";
+
+    district_arr[26] = "Dhalai|Gomati|Khowai|North Tripura|Sipahijala|South Tripura|Unakoti|West Tripura";
+
+    district_arr[27] = "Agra|Aligarh|Allahabad|Ambedkar Nagar|Auraiya|Azamgarh|Bagpat|Bahraich|Ballia|Balrampur|Banda|Barabanki|Bareilly|Basti|Bijnor|Budaun|Bulandshahar|C S M Nagar|Chandauli|Chitrakoot|Deoria|Etah|Etawah|Faizabad|Farrukhabad|Fatehpur|Firozabad|Gautam Buddha Nagar|Ghaziabad|Ghazipur|Gonda|Gorakhpur|Hamirpur|Hapur|Hardoi|Hathras|Jalaun|Jaunpur|Jhansi|Jyotiba Phule Nagar|Kannauj|Kanpur Dehat|Kanpur Nagar|Kashi Ram Nagar|Kaushambi|Kushinagar|Lakhimpur Kheri|Lalitpur|Lucknow|Maharajganj|Mahoba|Mainpuri|Mathura|Maunathbhanjan|Meerut|Mirzapur|Moradabad|Muzaffarnagar|Noida|Pilibhit|Pratapgarh|Rae Bareli|Rampur|Saharanpur|Sambhal|Sant Kabir Nagar|Sant Ravidas Nagar|Shahjahanpur|Shamli|Shrawasti|Siddharth Nagar|Sitapur|Sonbhadra|Sultanpur|Unnav|Varanasi";
+
+    district_arr[28] = "Almora|Bageshwar|Chamoli|Champawat|Dehradun|Garhwal|Hardwar|Nainital|Pithoragarh|Rudrapur|Tehri Garhwal|Udham Singh Nagar|Uttarkashi";
+
+    district_arr[29] = "Alipurduar|Bankura|Barddhaman|Birbhum|Dakshin Dinajpur|Darjiling|Haora|Hugli|Jalpaiguri|Koch Bihar|Maldah|Murshidabad|Nadia|North Twenty Four Parganas|Paschim Medinipur|Purba Medinipur|Puruliya|South Twenty Four Parganas|Uttar Dinajpur";
+
+
+
+    district_arr[30] = "Nicobar|North and Middle Andaman|South Andaman";
+
+    district_arr[31] = "Chandigarh";
+
+    district_arr[32] = "Dadra and Nagar Haveli";
+
+    district_arr[33] = "Daman|Diu";
+
+    district_arr[34] = "Central|East|New Delhi|North|North East|North West|Shahdara|South|South East|South West|West";
+
+    district_arr[35] = "Lakshadweep";
+
+    district_arr[36] = "Karaikal|Mahe|Pondicherry|Yanam";
+
+
+    function populateDistricts(stateElementId, districtElementId) {
+        var selectedStateIndex = document.getElementById(stateElementId).selectedIndex;
+        var districtElement = document.getElementById(districtElementId);
+        districtElement.length = 0;
+        districtElement.options[0] = new Option('Select district', '');
+        districtElement.selectedIndex = 0;
+        var district_ar = district_arr[selectedStateIndex].split("|");
+        for (var i = 0; i < district_ar.length; i++) {
+            districtElement.options[districtElement.length] = new Option(district_ar[i], district_ar[i]);
+        }
+    }
+
+    function populateStates(stateElementId, districtElementId) {
+        // given the id of the <select> tag as function argument, it inserts <option> tags
+        var stateElement = document.getElementById(stateElementId);
+        stateElement.length = 0;
+        stateElement.options[0] = new Option('Select state', '-1');
+        stateElement.selectedIndex = 0;
+        for (var i = 0; i < states_arr.length; i++) {
+            stateElement.options[stateElement.length] = new Option(states_arr[i], states_arr[i]);
+        }
+
+        // Assigned all countries. Now assign event listener for the states.
+
+        if (districtElementId) {
+            stateElement.onchange = function () {
+                populateDistricts(stateElementId, districtElementId);
+            };
+        }
+    }
+    populateStates("state_input", "district_input");
+
+
+
+    //#########################################################################################################################
+
+
+    function populateDistricts(stateElementId, districtElementId) {
+        var selectedStateIndex = document.getElementById(stateElementId).selectedIndex;
+        var districtElement = document.getElementById(districtElementId);
+        districtElement.length = 0;
+        districtElement.options[0] = new Option('Select district', '');
+        districtElement.selectedIndex = 0;
+        var district_ar = district_arr[selectedStateIndex].split("|");
+        for (var i = 0; i < district_ar.length; i++) {
+            districtElement.options[districtElement.length] = new Option(district_ar[i], district_ar[i]);
+        }
+    }
+
+    function populateStatesship(stateElementId, districtElementId) {
+        // given the id of the <select> tag as function argument, it inserts <option> tags
+        var stateElement = document.getElementById(stateElementId);
+        stateElement.length = 0;
+        stateElement.options[0] = new Option('Select state', '-1');
+        stateElement.selectedIndex = 0;
+        for (var i = 0; i < states_arr.length; i++) {
+            stateElement.options[stateElement.length] = new Option(states_arr[i], states_arr[i]);
+        }
+
+        // Assigned all countries. Now assign event listener for the states.
+
+        if (districtElementId) {
+            stateElement.onchange = function () {
+                populateDistricts(stateElementId, districtElementId);
+            };
+        }
+    }
+    populateStatesship("state_inputs", "district_inputs");
+
+
+    window.onload = function () {
+        var date = new Date();
+
+        var Mes = String(date.getMonth() + 1).padStart(2, '0');
+        var Dia = String(date.getDate()).padStart(2, '0');
+        var Anio = date.getFullYear();
+        document.getElementById("mydate").value = Anio + "-" + Mes + "-" + Dia;
+    };
+
+    //$(document).ready(function () {
+    //    var now = new Date();
+
+    //    var day = ("0" + now.getDate()).slice(-2);
+    //    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+    //    var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+
+    //    $('#mydate').val(today);
+    //});
+
+</script>
+
+
+

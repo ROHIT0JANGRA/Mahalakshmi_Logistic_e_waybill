@@ -1,0 +1,206 @@
+﻿@model Mahalakshmi_Logistic_Pvt_Ltd.Models.ChallanRequest.Challan
+
+@{
+    ViewBag.Title = "ChallanList";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+
+      
+                <div class="col-4">
+                    <h2 class="page-header">Challan List</h2>
+                </div>
+                  
+                <div class="col-4 pull-right">
+                    <a href="@Url.Action("Challan_Request", "AddChallan")" class="page-header"><i class="fa fa-plus-circle"></i>Add New</a>
+                </div>          
+            <div class="row">
+                <div class="panel panel-primary col-lg-12">
+
+                    <div class="table-responsive" style="height:40vh">
+
+                        <table class="table">
+                            <thead>
+
+                                <tr class="bg-secondary">
+                                    <th>
+                                        Invoice_id
+                                    </th>
+                                    <th>
+                                        Invoice_series
+                                    </th>
+                                    <th>
+                                        Date_created
+                                    </th>
+                                    <th>
+                                        Created_by
+                                    </th>
+                                    <th>
+                                        Consignee_id
+                                    </th>
+                                    <th>
+                                        Consigner_id
+                                    </th>
+                                    <th>
+                                        Branch_id
+                                    </th>
+                                    <th>
+                                        TotalQty
+                                    </th>
+                                    <th>
+                                        Total_pending_qty
+                                    </th>
+                                    <th>
+                                        Total_delivered_qty
+                                    </th>
+                                    <th>
+                                        Total_pickup
+                                    </th>
+                                    <th>
+                                        TotalItem
+                                    </th>
+                                    <th>
+                                        Sub_total
+                                    </th>
+                                    <th>
+                                        Dis_amt
+                                    </th>
+                                    <th>
+                                        Gross_total
+                                    </th>
+                                    <th>
+                                        Gst_amt
+                                    </th>
+                                    <th>
+                                        Order_total
+                                    </th>
+                                    <th>
+                                        Rental_price
+                                    </th>
+                                    <th>
+                                        Order_status
+                                    </th>
+                                    <th>
+                                        Ve_type
+                                    </th>
+                                    <th>
+                                        Ve_no
+                                    </th>
+                                    <th>
+                                        Ve_freight
+                                    </th>
+                                    <th>
+                                        Ve_driver_name
+                                    </th>
+                                    <th>
+                                        Ve_mobile_no
+                                    </th>
+                                    <th>
+                                        Ve_transport
+                                    </th>
+                                    <th>
+                                        Del
+                                    </th>
+                                    <th></th>
+                                </tr>
+
+                            </thead>
+                            @foreach (var item in ViewBag.ChallanList)
+                            {
+                                <tbody>
+
+                                    <tr>
+                                        <td>
+                                            @item.Invoice_id
+                                        </td>
+                                        <td>
+                                            @item.Invoice_series
+                                        </td>
+                                        <td>
+                                            @item.Date_created
+                                        </td>
+                                        <td>
+                                            @item.Created_by
+                                        </td>
+                                        <td>
+                                            @item.Consignee_id
+                                        </td>
+                                        <td>
+                                            @item.Consigner_id
+                                        </td>
+                                        <td>
+                                            @item.Branch_id
+                                        </td>
+                                        <td>
+                                            @item.TotalQty
+                                        </td>
+                                        <td>
+                                            @item.Total_pending_qty
+                                        </td>
+                                        <td>
+                                            @item.Total_delivered_qty
+                                        </td>
+                                        <td>
+                                            @item.Total_pickup
+                                        </td>
+                                        <td>
+                                            @item.TotalItem
+                                        </td>
+                                        <td>
+                                            @item.Sub_total
+                                        </td>
+                                        <td>
+                                            @item.Dis_amt
+                                        </td>
+                                        <td>
+                                            @item.Gross_total
+                                        </td>
+                                        <td>
+                                            @item.Gst_amt
+                                        </td>
+                                        <td>
+                                            @item.Order_total
+                                        </td>
+                                        <td>
+                                            @item.Rental_price
+                                        </td>
+                                        <td>
+                                            @item.Order_status
+                                        </td>
+                                        <td>
+                                            @item.Ve_type
+                                        </td>
+                                        <td>
+                                            @item.Ve_no
+                                        </td>
+                                        <td>
+                                            @item.Ve_freight
+                                        </td>
+                                        <td>
+                                            @item.Ve_driver_name
+                                        </td>
+                                        <td>
+                                            @item.Ve_mobile_no
+                                        </td>
+                                        <td>
+                                            @item.Ve_transport
+                                        </td>
+                                        <td>
+                                            @item.Del
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                    }
+
+                           
+                        </table>
+                    </div>
+
+                </div>
+            </div>

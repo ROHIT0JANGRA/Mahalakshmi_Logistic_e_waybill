@@ -1,0 +1,78 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>MLPL :: Login</title>
+    <link rel="icon" type="image/x-icon" href="~/Content/images/Logo.png">
+    <link href="~/Content/Soft/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/Soft/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <!-- MetisMenu CSS -->
+    <link href="~/Content/Soft/css/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="~/Content/Soft/css/startmin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="~/Content/Soft/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body style="background-image: url('../Content/images/BG1.jpg');background-repeat:no-repeat;background-size:100% auto">
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="login-panel panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Login Here...</h3>
+
+                        </div>
+                        <div class="panel-body" align="center">
+                            <img src="~/Content/images/Logo.png" height="100" width="100" />
+                            <form role="form" method="post">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Login ID" name="UserName" type="email" autofocus>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Password" name="Password" type="password" value="">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                        </label>
+                                    </div>
+                                    <!-- Change this to a button or input when using this as a form -->
+                                    <button class="btn btn-success btn-block" type="submit">Login </button>
+
+                                    @*<a href="@Url.Action("Dashboard", "Home")"type="sub" class="btn btn-lg btn-success btn-block">Login</a>*@
+                                </fieldset>
+                            </form>
+                            <p class="text-bg-danger">@ViewData["error"]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/Soft/js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Content/Soft/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/Content/Soft/js/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../js/startmin.js"></script>
+</body>
+</html>
+

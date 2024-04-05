@@ -1,0 +1,271 @@
+﻿
+@{
+    ViewBag.Title = "NewConsignee";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="col-lg-12">
+    <h4 class="page-header"><i class="fa fa-user"></i> Add Consignee </h4>
+</div>
+<!-- /.col-lg-12 -->
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Consignee Details
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-asterisk"></i> </span>
+                            <input type="text" class="form-control badge-border" placeholder="Consignee Code">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-edit"></i> </span>
+                            <input type="text" class="form-control" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-user-secret"></i> </span>
+                            <input type="text" class="form-control" placeholder="Foreign Name">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-mars"></i> </span>
+                            <select class="form-control">
+                                <option>Select Category</option>
+                                <option>SUB-CUST</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-male"></i> </span>
+                            <select class="form-control">
+                                <option>Select Group</option>
+                                <option>Customers</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-rupee"></i> </span>
+                            <select class="form-control">
+                                <option>Select Currency</option>
+                                <option>Indian Rupee</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-12">
+                        <div class="panel tabbed-panel panel-primary">
+                            <div class="panel-heading clearfix">
+                                @*<div class="panel-title pull-left">Tabbed Panel Primary</div>*@
+                                <div class="pull-left">
+                                    <ul class="nav nav-tabs" style="font-size:11px">
+                                        <li class="active"><a href="#tab-primary-1" data-toggle="tab">General</a></li>
+                                        <li><a href="#tab-primary-2" data-toggle="tab">Contact Person</a></li>
+                                        <li><a href="#tab-primary-3" data-toggle="tab">Address</a></li>
+                                        <li><a href="#tab-primary-4" data-toggle="tab">Payment Terms</a></li>
+                                        <li><a href="#tab-primary-5" data-toggle="tab">Payment Run</a></li>
+                                        <li><a href="#tab-primary-6" data-toggle="tab">Accounting</a></li>
+                                        <li><a href="#tab-primary-7" data-toggle="tab">Properties</a></li>
+                                        <li><a href="#tab-primary-8" data-toggle="tab">Remarks</a></li>
+                                        <li><a href="#tab-primary-9" data-toggle="tab">Attachments</a></li>
+                                        <li><a href="#tab-primary-10" data-toggle="tab">eDocs</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" id="tab-primary-1">
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @* <label class="control-label" for="inputSuccess">Tel 1</label>*@
+                                                <input type="text" class="form-control" placeholder="Tel 1" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Tel 2</label>*@
+                                                <input type="text" class="form-control" placeholder="Tel 2" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Mobile Phone</label>*@
+                                                <input type="text" class="form-control" placeholder="Mobile Phone" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Fax</label>*@
+                                                <input type="text" class="form-control" placeholder="Fax" id="inputSuccess">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Tel 2</label>*@
+                                                <input type="text" class="form-control" placeholder="E-mail" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Mobile Phone</label>*@
+                                                <input type="text" class="form-control" placeholder="Web Site" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Fax</label>*@
+                                                <input type="text" class="form-control" placeholder="Shipping Type" id="inputSuccess">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Tel 2</label>*@
+                                                <input type="text" class="form-control" placeholder="Factor Indicator" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Mobile Phone</label>*@
+                                                <input type="text" class="form-control" placeholder="Bussiness Partner Project" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Fax</label>*@
+                                                <input type="text" class="form-control" placeholder="Industry" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Fax</label>*@
+                                                <input type="text" class="form-control" placeholder="Type of Bussiness" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Fax</label>*@
+                                                <input type="text" class="form-control" placeholder="Alias Name" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @* Tab Second *@
+                                    <div class="tab-pane fade" id="tab-primary-2">
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @* <label class="control-label" for="inputSuccess">Tel 1</label>*@
+                                                <input type="text" class="form-control" placeholder="Tel 1" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Tel 2</label>*@
+                                                <input type="text" class="form-control" placeholder="Tel 2" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Mobile Phone</label>*@
+                                                <input type="text" class="form-control" placeholder="Mobile Phone" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Fax</label>*@
+                                                <input type="text" class="form-control" placeholder="Fax" id="inputSuccess">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Tel 2</label>*@
+                                                <input type="text" class="form-control" placeholder="E-mail" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Mobile Phone</label>*@
+                                                <input type="text" class="form-control" placeholder="Web Site" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Fax</label>*@
+                                                <input type="text" class="form-control" placeholder="Shipping Type" id="inputSuccess">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Tel 2</label>*@
+                                                <input type="text" class="form-control" placeholder="Factor Indicator" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Mobile Phone</label>*@
+                                                <input type="text" class="form-control" placeholder="Bussiness Partner Project" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Fax</label>*@
+                                                <input type="text" class="form-control" placeholder="Industry" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Fax</label>*@
+                                                <input type="text" class="form-control" placeholder="Type of Bussiness" id="inputSuccess">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group has-success">
+                                                @*<label class="control-label" for="inputSuccess">Fax</label>*@
+                                                <input type="text" class="form-control" placeholder="Alias Name" id="inputSuccess">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="tab-pane fade" id="tab-primary-3">Page 3</div>
+                                    <div class="tab-pane fade" id="tab-primary-4">Page 4</div>
+                                    <div class="tab-pane fade" id="tab-primary-5">Page 5</div>
+                                    <div class="tab-pane fade" id="tab-primary-6">Page 6</div>
+                                    <div class="tab-pane fade" id="tab-primary-7">Page 7</div>
+                                    <div class="tab-pane fade" id="tab-primary-8">Page 8</div>
+                                    <div class="tab-pane fade" id="tab-primary-9">Page 9</div>
+                                    <div class="tab-pane fade" id="tab-primary-10">Page 10</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+
+
+                    <div align="center" class="col-lg-12">
+                        <button type="button" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                        <button type="button" class="btn btn-danger"><i class="fa fa-refresh"></i> Reset</button>
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+
+</div>

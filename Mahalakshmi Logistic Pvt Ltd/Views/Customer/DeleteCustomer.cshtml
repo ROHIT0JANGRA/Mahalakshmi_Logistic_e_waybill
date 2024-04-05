@@ -1,0 +1,239 @@
+﻿@model Mahalakshmi_Logistic_Pvt_Ltd.Models.Customers.Customer
+@{
+    ViewBag.Title = "DeleteCustomer";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+@*<script>
+   $(function () {
+var msg = '@ViewData["success"]';
+       if (msg == 2) {
+           alert("Customer Deleted Successfully !!");
+           window.location.href = "@Url.Action("CustomerList", "Customer")";
+       } else {
+           alert("Customer Not Found !!");
+             window.location.href = "@Url.Action("CustomerList", "Customer")";
+       }
+});
+</script>*@
+<h2>DeleteCustomer</h2>
+<div class="page-header pull-right"><a href="@Url.Action("CustomerList","Customer")"><i class="fa fa-list">List</i> </a></div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Customer Delete
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    @foreach (var item in ViewBag.customerDetails)
+                    {
+                        <form method="post">
+
+                            <div class="col-lg-4">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-asterisk"></i> </span>
+                                    <input type="text" placeholder="Customer Name" class="form-control" value="@item.C_Name" disabled name="c_name" required />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope"></i> </span>
+                                    <input type="email" placeholder="Customer Email" class="form-control" name="c_email" value="@item.C_email" disabled />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-mobile-phone"></i> </span>
+                                    <input type="number" class="form-control" placeholder="Contact No" name="c_mobile" value="@item.C_mobile" disabled />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-mail-reply-all"></i> </span>
+                                    <input type="text" name="c_pan_no" class="form-control" placeholder="Pan No" value="@item.C_pan_no" disabled />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i> </span>
+
+                                    <input type="text" class="form-control" name="branch_id" value="@item.Branch_id" disabled />
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-code"></i> </span>
+                                    <input name="gstin" type="text" placeholder="Gst No" class="form-control" value="@item.Gstin" disabled />
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="panel tabbed-panel panel-primary">
+                                    <div class="panel-heading clearfix">
+                                        @*<div class="panel-title pull-left">Tabbed Panel Primary</div>*@
+                                        <div class="pull-left">
+                                            <ul class="nav nav-tabs" style="font-size:11px">
+                                                <li><a href="#tab-primary-1" data-toggle="tab">COSTOMER CONTACT</a></li>
+                                                <li><a href="#tab-primary-2" data-toggle="tab">REGISTERED ADDRESS</a></li>
+                                                <li><a href="#tab-primary-3" data-toggle="tab">SHIPPING ADDRESS</a></li>
+                                                @*<li><a href="#tab-primary-5" data-toggle="tab">Payment Run</a></li>*@
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade in active horizontal-scrollable" id="tab-primary-1" style="overflow-y: auto">
+                                                <div class="container ">
+                                                    <table id="dtHorizontalExample" class="table table-responsive table-striped table-bordered table-sm" cellspacing="0" style="width:100%">
+                                                        <thead class="bg-dark">
+                                                            <tr>
+
+                                                                <th>Name</th>
+                                                                <th>
+                                                                    Designation
+                                                                </th>
+                                                                <th>Contact No</th>
+                                                                <th>Email</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <input type="text" name="contact_name" class="form-control" placeholder="Name" value="@item.Contact_name" disabled />
+                                                                </td>
+                                                                <td>
+                                                                    <input type="text" name="contact_designation" class="form-control" placeholder="Designation" value="@item.Contact_designation" disabled />
+                                                                </td>
+                                                                <td>
+                                                                    <input type="number" name="contact_no" class="form-control" placeholder="Contact No" value="@item.Contact_no" disabled />
+                                                                </td>
+                                                                <td>
+                                                                    <input type="email" name="contact_email" class="form-control" placeholder="Eamil" value="@item.Contact_email" disabled />
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            @* Tab Second *@
+                                            <div class="tab-pane fade" id="tab-primary-2">
+
+                                                <div class="col-lg-4">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" for="textAreaExample3">State</label>
+
+                                                        <select class="form-control" id="state_input" name="cors_state" onchange="populateStates(this.id,'district_input')" required disabled>
+                                                            <option value="@item.Cors_State">@item.Cors_State</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" for="textAreaExample3">Distict</label>
+
+                                                        <select class="form-select form-control" id="district_input" name="cors_district" required disabled>
+
+                                                            <option value="@item.Cors_District">@item.Cors_District</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" for="textAreaExample3">City</label>
+                                                        <input class="form-select form-control" type="text" name="cors_city" disabled value="@item.Cors_City" />
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" for="textAreaExample3">PinCode</label>
+                                                        <input class="form-select form-control" type="text" name="cors_pincode" disabled value="@item.Cors_Pincode" />
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" for="textAreaExample3">Address</label>
+                                                        @*<textarea class="form-control" name="cors_address" id="textAreaExample3" rows="2"></textarea>*@
+                                                        <input type="text" class="form-control" disabled value="@item.Cors_Address" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="tab-primary-3">
+                                                <div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group ">
+                                                            <label class="control-label" for="inputSuccess">State</label>
+
+                                                            <select class="form-control" id="state_inputs" disabled name="ship_state" onchange="populateStatesship(this.id,'district_inputs')">
+                                                                <option value="@item.Ship_state">@item.Ship_state</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group ">
+                                                            <label class="control-label" for="inputSuccess">District</label>
+
+                                                            <select class="form-select form-control" id="district_inputs" name="ship_district" disabled>
+
+                                                                <option value="@item.Ship_district">@item.Ship_district</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label" for="inputSuccess">City</label>
+                                                            <input type="text" class="form-control" name="ship_city" placeholder="City" id="inputSuccess" disabled value="@item.Ship_city" />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label" for="inputSuccess">Shipping PinCode</label>
+                                                            <input type="text" class="form-control" name="ship_pincode" placeholder="Pincode" id="inputSuccess" disabled value="@item.Ship_pincode" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label" for="inputSuccess">Shipping Address</label>
+                                                            <input type="text" class="form-control" placeholder="Address" name="ship_address" id="inputSuccess" disabled value="@item.Ship_address" />
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel -->
+                            </div>
+                            <div align="center" class="col-lg-12">
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Delete</button>
+                                <button type="reset" class="btn btn-warning" disabled><i class="fa fa-refresh"></i> Reset</button>
+                            </div>
+                          
+                        </form>
+                    }
+                    </div>
+                <!-- /.col-lg-6 (nested) -->
+            </div>
+            <!-- /.row (nested) -->
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+</div>
+
+

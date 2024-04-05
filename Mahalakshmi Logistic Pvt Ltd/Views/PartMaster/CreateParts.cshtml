@@ -1,0 +1,197 @@
+﻿@*@model Mahalakshmi_Logistic_Pvt_Ltd.Models.PartMaster.AddParts*@
+@{
+    ViewBag.Title = "CreateParts";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<script>
+    $(function () {
+        var msz = @ViewData["Success"];
+
+        if (msz == 1) {
+            alert("New Part Added Successfully !! ");
+        }
+
+    })
+    function onchangeDatemy() {
+       /* var n = document.getElementById("#mycu");*/
+        var cu = new Date().toLocaleDateString();
+        return cu;
+    }
+     
+
+</script>
+
+<div class="col-lg-12">
+    <h3 class="page-header"><i class="fa fa-user-plus"></i> Add Parts </h3>
+
+
+
+    <span style="color:green">@ViewBag.Maz</span>
+
+
+    <span style="color:red">@ViewBag.error </span>
+
+    @if (@ViewBag.ErrorMessage != null)
+    {
+        foreach (var it in @ViewBag.ErrorMessage)
+        {<span style="color:red">@it </span>}
+    }
+
+
+
+</div>
+<!-- /.col-lg-12 -->
+<!-- /.row -->
+<div class="col-4 pull-right">
+    <a href="@Url.Action("PartsListAsync","PartMaster")" class="page-header"><i class="fa fa-list"></i>Part List</a>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Parts Details
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <form method="post">
+                           <input type="date" name="created_date"  class="form-control" />
+                        <div class="col-lg-6">
+                            <div class="form-group input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-asterisk"></i> </span>
+                                @*<input type="text" class="form-control badge-border" placeholder="User Code">*@
+                                <select class="form-control" name="Category" required>
+                                    <option selected>--Category--</option>
+                                    <option value="PPIN">PPIN</option>
+                                    <option value="CRT">CRT</option>
+                                    <option value="WMP">WMP</option>
+                                    <option value="MNT">MNT</option>
+                                    <option value="MCM">MCM</option>
+                                    <option value="RPB">RPB</option>
+                                    <option value="WPL">WPL</option>
+                                    <option value="PP BOX">PP BOX</option>
+                                    <option value="PP Foldable Box">PP Foldable Box</option>
+                                    <option value="FLC-1210">FLC-1210</option>
+                                    <option value="FLC-128">FLC-128</option>
+                                    <option value="FLC-1411">FLC-1411</option>
+                                    <option value="FLC-1612">FLC-1612</option>
+                                </select>
+
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-edit"></i> </span>
+                                <input type="text" class="form-control" name="part_number" placeholder="Equipment Id">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker"></i> </span>
+                                <input type="text" class="form-control" name="hsn_number" placeholder="HSN Number">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
+                                <input type="text" class="form-control" name="dimensions" placeholder="Size">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i> </span>
+                                <input type="text" class="form-control" name="description" placeholder="Description">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-key"></i> </span>
+                                <input type="text" class="form-control" placeholder="Weight(Kg)" name="weight">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-key"></i> </span>
+                                <input type="text" class="form-control" placeholder="Alias" name="alias">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-angle-double-up"></i> </span>
+                                <input type="text" class="form-control" placeholder="Volume Weight" name="volume_weight">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-rupee"></i> </span>
+                                <input type="text" class="form-control" placeholder="Purchase_price" name="purchase_price">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-get-pocket"></i> </span>
+                                <input type="text" class="form-control" placeholder="Pocket Qty" name="pocket_qty">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i> </span>
+                                <input type="text" class="form-control" placeholder="GSM" name="gsm">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-bar-chart-o"></i> </span>
+                                <input type="text" class="form-control" placeholder="Color" name="color">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-th-large"></i> </span>
+                                <input type="text" class="form-control" placeholder="Thickness" name="thickness">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-warning"></i> </span>
+                                <input type="text" class="form-control" placeholder="Stock Alert" name="stock_alert">
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-file-text"></i> </span>
+                                <textarea type="text" class="form-control" placeholder="Description" name="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-star"></i> </span>
+                                <select class="form-control" name="status">
+                                    <option selected value="Active">Active</option>
+                                    <option value="InActive">InActive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div align="center">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                            <button type="reset" class="btn btn-danger"><i class="fa fa-refresh"></i> Reset</button>
+                        </div>
+                    </form>
+                        <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+               
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+    <!-- /.row -->
+
+</div>
+
+
+

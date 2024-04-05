@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewBag.Title = "DeleteBranch";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<div class="col-4">
+    <h3 class="page-header">Add New Branch</h3>
+</div>
+<div class="col-4">
+    <a href="@Url.Action("BranchList","Branch")"><i class="fa fa-list"></i>Branch List</a>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Branch Details
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    @foreach (var item in ViewBag.BranchById)
+                    {
+                        <form method="post">
+
+
+
+                            <div class="col-lg-4">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-asterisk"></i> </span>
+                                    <input type="text" class="form-control" name="branch_name" id="bname" placeholder="Branch Name" required value="@item.Branch_name"disabled />
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-edit"></i> </span>
+                                    <input type="text" class="form-control" placeholder="Branch Code" value="@item.Branch_code" name="branch_code" id="bcode" required disabled />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-file-zip-o"></i> </span>
+                                    <input type="text" class="form-control" placeholder="Pan No" name="branch_pan_no" value="@item.Branch_pan_no" required id="pno" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-mail-reply-all"></i> </span>
+                                    <input type="text" name="branch_gstin" class="form-control" placeholder="Gst No" required id="gno" value="@item.Branch_gstin" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i> </span>
+                                    <input type="tel" name="branch_mobile" class="form-control" placeholder="Branch No" value="@item.Branch_mobile"disabled />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope-square"></i> </span>
+                                    <input name="branch_email" type="email" placeholder="Branch Eamil" class="form-control" value="@item.Branch_email"disabled />
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            Contact Details
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-asterisk"></i> </span>
+                                                        <input type="text" class="form-control badge-border" name="contact_name" value="@item.Contact_name" placeholder="Contact Name" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
+                                                        <input type="tel" class="form-control" placeholder="Contact No" name="contact_no" value="@item.Contact_no" disabled >
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-envelope"></i> </span>
+                                                        <input type="email" class="form-control" name="contact_email" placeholder="Contact Email" value="@item.Contact_email" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-map-pin"></i> </span>
+                                                       <input type="text" name="state" class="form-control" value="@item.State" disabled />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-location-arrow"></i> </span>
+                                                        @*<input type="text" class="form-control" placeholder="Distict" name="district">*@
+                                                        <select class="form-control" id="inputDistrict" name="distict">
+                                                            <option value="@item.District" selected="selected">-- Select Distict -- </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-map-o"></i> </span>
+                                                        <input type="text" class="form-control" placeholder="City" name="city" value="@item.City" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-code"></i> </span>
+                                                        <input type="tel" class="form-control" placeholder="PinCode" name="pincode" value="@item.Pincode" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-address-card"></i> </span>
+                                                        <input type="text" class="form-control" placeholder="Address" name="address" value="@item.Address" disabled>
+                                                    </div>
+                                                </div>
+
+                                                <!-- /.col-lg-6 (nested) -->
+                                            </div>
+                                            <!-- /.row (nested) -->
+                                        </div>
+                                        <!-- /.panel-body -->
+                                    </div>
+                                    <!-- /.panel -->
+                                </div>
+                                <!-- /.col-lg-12 -->
+                                <!-- /.row -->
+
+                            </div>
+
+                            <!-- /.panel -->
+                            <div align="center" class="col-lg-12">
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                                <button type="reset" class="btn btn-warning"><i class="fa fa-refresh"></i> Reset</button>
+                            </div>
+
+                        </form>
+                    }
+                </div>
+
+
+
+            </div>
+            <!-- /.col-lg-6 (nested) -->
+        </div>
+        <!-- /.row (nested) -->
+    </div>
+    <!-- /.panel-body -->
+</div>
+<!-- /.panel -->

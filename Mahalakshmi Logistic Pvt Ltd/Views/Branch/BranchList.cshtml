@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Mahalakshmi_Logistic_Pvt_Ltd.Models.Branch.AddBranch>
+
+@{
+    ViewBag.Title = "BranchList";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="col-4">
+    <h2 class="page-header">Challan List</h2>
+</div>
+
+<div class="col-4 pull-right">
+    <a href="@Url.Action("Branch", "Branch")" class="page-header"><i class="fa fa-plus-circle"></i>Add New</a>
+</div>
+<div class="row">
+    <div class="panel panel-primary col-lg-12">
+
+        <div class="table-responsive" style="height:40vh">
+
+            <table class="table">
+                <thead>
+
+                    <tr class="bg-secondary">
+                        <th>
+                            Branch_name
+                        </th>
+                        <th>
+                            Branch_code
+                        </th>
+                        <th>
+                            Branch_email
+                        </th>
+                        <th>
+                            Branch_mobile
+                        </th>
+                        <th>
+                            Branch_pan_no
+                        </th>
+                        <th>
+                            Branch_gstin
+                        </th>
+                        <th>
+                            State
+                        </th>
+                        <th>
+                            City
+                        </th>
+                        <th>
+                            Address
+                        </th>
+                        <th>
+                            Contact_name
+                        </th>
+                        <th>
+                            Contact_No
+                        </th>
+                        <th>
+                            Contact_email
+                        </th>
+
+                        <th>Edit | Delete</th>
+                       
+                    </tr>
+
+                </thead>
+                @foreach (var item in ViewBag.BranchList)
+                {
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                @item.Branch_name
+                            </td>
+                            <td>
+                                @item.Branch_code
+                            </td>
+                            <td>
+                                @item.Branch_email
+                            </td>
+                            <td>
+                                @item.Branch_mobile
+                            </td>
+                            <td>
+                                @item.Branch_pan_no
+                            </td>
+                            <td>
+                                @item.Branch_gstin
+                            </td>
+                            <td>
+                                @item.State
+                            </td>
+                            <td>
+                                @item.City
+                            </td>
+                            <td>
+                                @item.Address
+                            </td>
+                            <td>
+                                @item.Contact_name
+                            </td>
+                            <td>
+                                @item.Contact_no
+                            </td>
+                            <td>
+                                @item.Contact_email
+                            </td>
+
+                            <td>
+                                <a href="@Url.Action("EditBranch", "Branch", new { id = @item.Id })"><i class="fa fa-edit"></i></a> |
+
+
+                                <a href="@Url.Action("DeleteBranch", "Branch", new { id = @item.Id })" style="color:red"><i class="fa fa-trash-o bg-danger "></i></a>
+
+                            <td>
+                                @*<a href="@Url.Action("Details", "Branch", new { id = @item.Id })"><i class="fa fa-list"></i></a> |*@
+
+                        </tr>
+                    </tbody>
+                }
+
+
+            </table>
+        </div>
+
+    </div>
+</div>

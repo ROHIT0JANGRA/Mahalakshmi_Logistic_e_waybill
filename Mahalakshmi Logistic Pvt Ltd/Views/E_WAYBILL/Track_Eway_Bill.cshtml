@@ -1,0 +1,542 @@
+﻿
+@{
+    ViewBag.Title = "Track_Eway_Bill";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+@*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+<style>
+    .no-print {
+        display: none;
+    }
+</style>
+<div id="fullbody">
+
+    <div class="col-4">
+        <h2 class="page-header">EWAY-BILL Tracking</h2>
+    </div>
+    <script src="~/Content/scripts/EwaybillTracking.js"></script>
+    <div class="col-4 pull-right">
+
+
+        @*<a href="@Url.Action("Challan_Request", "AddChallan")" class="page-header"><i class="fa fa-plus-circle"></i>Add New</a>*@
+    </div>
+    <div class="row">
+        <div id="relatedFields" class="hidden panel-bod">
+            <form id="consignmentForm" class="m-3 col-lg-12 col-md-12 col-sm-6 ">
+                <div class="mb-3">
+                    <label for="GstnoInput" class="form-label">Gst No :</label>
+                    <input type="text" id="GstnoInput" name="GstnoInput" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="ewayWayBillInput" class="form-label">Enter E_way Bill No :</label>
+                    <input type="text" id="ewayWayBillInput" class="" required>
+                </div>
+                <div class="mb-3">
+                    @*<label for="UsernameInput" class="form-label">Username :</label>*@
+                    <input type="text" id="UsernameInput" name="UsernameInput" disabled hidden>
+                </div>
+                <div class="mb-3">
+                    @*<label for="PaswrdInput" class="form-label">Password :</label>*@
+                    <input type="text" id="PaswrdInput" name="PaswrdInput" disabled hidden>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-sm" id="btn" onclick="track_E_wayBill()">Get</button>
+            </form>
+        </div>
+
+        <div class="row">
+
+            <div class="mb-3">
+                <label for="stateSelect" class="form-label">Select State:</label>
+                <select id="stateSelect" class="nav-form-select">
+                    <option value="">Select a state...</option>
+                    <option value="Test">Test</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Madhya-Pradesh">Madhya Pradesh</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Maharashtra">Maharashtraa</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Delhi">Delhi</option>
+
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel col-lg-12 col-md-12 col-sm-6">
+            <div class="table-responsive" style="height:60vh;max-width:900px;">
+                <button id="printresult" class=" btn btn-primary pull-right">Print</button>
+                <button onclick="generatePDF()">Generate PDF</button>
+
+                <div id="resultprint">
+                    <div id="result" class="col-lg-12 col-md-12 col-sm-6 table-responsive">
+                        @*<div id="printresult" class=" col-lg-12 col-md-12 col-sm-6 pull-right"></div>*@
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function track_E_wayBill() {
+        var vno = document.getElementById("ewayWayBillInput").value;
+        var UsernameInput = document.getElementById("UsernameInput").value;
+        var PaswrdInput = document.getElementById("PaswrdInput").value;
+        var gstNoInput = document.getElementById("GstnoInput").value;
+
+
+        // Construct the URL live portal
+        var url = "http://ewayasp.webtel.in/EWayBill/v1.3/GetEWB";
+
+        // for testing api url
+        //var urls = "http://ewaysandbox.webtel.in/Sandbox/EWayBill/v1.3/GetEW";
+
+        // Construct the JSON payload
+        var payload = {
+            "GSTIN": gstNoInput,
+            ////"ewbNo": 241731485553,
+            "ewbNo": vno,
+            "EWBUserName": UsernameInput,
+            "EWBPassword": PaswrdInput,
+            "Year": 2024,
+            "Month": 1,
+            "EFUserName": "039C10BA-5F49-4C9C-98B7-2B14AAFA38E8",
+            "EFPassword": "1D4331EF-1DFB-43D3-A065-4F24DBBEB1CD",
+            "CDKey": "1550859"
+
+            // ****************************************** For Testing Api **************************************************
+
+            //"GSTIN": "05AAACD5767E1ZT",
+            ////"ewbNo": 341000798954,
+            //"EWBUserName": "05AAACD5767E1ZT",
+            //"EWBPassword": "abc123@@",
+            //"EFUserName": "05AAACD5767E1ZT",
+            //"EFPassword": "abc123@@",
+            //"CDKey": "1000685"
+
+        };
+
+        // Make the POST request
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                //    'Authorization': '/IalkRmh3z4=:::ZH4TUvIeJ3A=',
+            },
+            body: JSON.stringify(payload),
+        }).then(response => response.json()).then(data => {
+            // Display the result
+            //console.log(data);
+            console.log("Data Is Fetch Successfully");
+            displayConsignmentDetails(data);
+        })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById("result").innerHTML = "Error occurred. Please try again.";
+            });
+    }
+
+    function print_ewaybill() {
+        var bodydata = documemnt.body.innerHTML;
+        var printedarea = document.getElementById('result').innerHTML;
+        document.getElementById('fullbody').innerHTML = printedarea;
+        window.print();
+        documemnt.getElementById('fullbody').innerHTML = bodydata;
+
+    };
+    function displayConsignmentDetails(data) {
+        var resultDiv = document.getElementById("result");
+        //var printdiv = document.getElementById("printresult");
+
+        // Set attributes for the button (optional)
+
+        document.getElementById("printresult").addEventListener('click', print_ewaybill);
+        resultDiv.innerHTML = ""; // Clear previous results
+        // format the data for display
+        var EWBstatus = JSON.parse(data);
+        console.log("Direct parse data : ", EWBstatus);
+
+        var EWBDetails = JSON.parse(EWBstatus[0].EWBDetails);
+        console.log(EWBDetails);
+
+        if (EWBstatus[0].EWBDetails) {
+            var itemList = EWBDetails.itemList;
+            var tableContent = `
+                <table class="table table-sm table-responsive"  id="myTable" >
+                    <thead>
+                        <tr>
+                            <th scope="col">Eway Bill Details</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table table-sm mt-1 table-responsive table-active" >
+                        <tr>
+                            <td>E-Way Bill No</td>
+                            <td>` + EWBDetails.ewbNo + `</td>
+                        </tr>
+                        <tr>
+                            <td>E-Way Bill Date</td>
+                            <td>`+ EWBDetails.ewayBillDate + `</td>
+                        </tr>
+                        <tr>
+                            <td>Generated By</td>
+                            <td>`+ EWBDetails.fromGstin + " - " + EWBDetails.fromTrdName + `</td>
+                        </tr>
+                        <tr>
+                            <td>Valid From</td>
+                            <td>` + EWBDetails.ewayBillDate + " [" + EWBDetails.actualDist + "Kms]" + `</td>
+                        </tr>
+                        <tr>
+                            <td>Valid Until</td>
+                            <td>` + EWBDetails.validUpto + `</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Part - A</th>
+                            <th scope="col"></th>
+                        </tr>
+                        <tr>
+                            <td>GSTIN of Supplier</td>
+                            <td>` + EWBDetails.fromGstin + ", " + EWBDetails.fromTrdName + `</td>
+                        </tr>
+                        <tr>
+                            <td>Place of Dispatch</td>
+                            <td>` + EWBDetails.fromPlace + `</td>
+                        </tr>
+                        <tr>
+                            <td>GSTIN of Receipient</td>
+                            <td>` + EWBDetails.toGstin + ", " + EWBDetails.toTrdName + `</td>
+                        </tr>
+                        <tr>
+                            <td>Place of Delivery</td>
+                            <td>` + EWBDetails.toPlace + `</td>
+                        </tr>
+                        <tr>
+                            <td>Document No</td>
+                            <td>` + EWBDetails.docNo + `</td>
+                        </tr>
+                        <tr>
+                            <td>Document Date</td>
+                            <td>` + EWBDetails.docDate + `</td>
+                        </tr>
+                        <tr>
+                            <td>Value of Goods</td>
+                            <td>` + EWBDetails.totInvValue + `</td>
+                        </tr>
+                        <tr>
+                            <td>HSN Code</td>
+                            <td>` + itemList[0].hsnCode + " - " + itemList[0].productDesc + `</td>
+                        </tr>
+                        <tr>
+                            <td>Reason for Transportation</td>
+                            <td>`;
+            if (EWBDetails.supplyType == "O") {
+                tableContent += "Outward";
+            }
+            if (EWBDetails.supplyType == "I") {
+                tableContent += "Inward";
+            }
+
+            if (EWBDetails.subSupplyType == 1) {
+                tableContent += ` - Supply`;
+            }
+            else if (EWBDetails.subSupplyType == 2) {
+                tableContent += ` - Import`;
+            }
+            else if (EWBDetails.subSupplyType == 3) {
+                tableContent += ` - Export`;
+            }
+            else if (EWBDetails.subSupplyType == 4) {
+                tableContent += ` - Job Work`;
+            }
+            else if (EWBDetails.subSupplyType == 5) {
+                tableContent += ` - For Own Use`;
+            }
+            else if (EWBDetails.subSupplyType == 6) {
+                tableContent += ` - Job work Returns`;
+            }
+            else if (EWBDetails.subSupplyType == 7) {
+                tableContent += ` - Sales Return`;
+            }
+            else if (EWBDetails.subSupplyType == 8) {
+                tableContent += ` - Others`;
+            }
+            else if (EWBDetails.subSupplyType == 9) {
+                tableContent += ` - SKD/CKD`;
+            }
+            else if (EWBDetails.subSupplyType == 10) {
+                tableContent += ` - Line Sales`;
+            }
+            else if (EWBDetails.subSupplyType == 11) {
+                tableContent += ` - Recipient Not Known`;
+            }
+            else if (EWBDetails.subSupplyType == 12) {
+                tableContent += ` - Exhibition or Fairs`;
+            }
+            else {
+                tableContent += "NA";
+            }
+
+            tableContent +=
+                `</td>
+                        </tr>
+                        <tr>
+                            <td>Transporter</td>
+                            <td>` + EWBDetails.transporterId + " & " + EWBDetails.transporterName + `</td>
+                        </tr>
+                    </tbody>
+                 </table>
+                   <div class="table-responsive-sm table-responsive">
+                    <table class="table table-sm table-responsive">
+                        <thead>
+                            <tr>
+                                <th colspan="7">Part - B</th>
+                            </tr>
+                            <tr>
+                                <td>Mode</td>
+                                <td>Vehicle / Trans Doc No & Dt.</td>
+                                <td>From</td>
+                                <td>Entered Date</td>
+                                <td>Entered By</td>
+                                <td>CEWB No. (if any)</td>
+                                <td>Multi Veh.Info (if any)</td>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+            var VehiclListDetails = EWBDetails.VehiclListDetails;
+            if (VehiclListDetails) {
+                for (var i = 0; i < VehiclListDetails.length; i++) {
+                    tableContent +=
+                        `<tr>
+                                        <td>`;
+                    if (VehiclListDetails[i].transMode === "1") {
+                        tableContent += "Road";
+                    }
+                    else if (VehiclListDetails[i].transMode === "2") {
+                        tableContent += "Rail";
+                    }
+                    else if (VehiclListDetails[i].transMode === "3") {
+                        tableContent += "Air";
+                    }
+                    else if (VehiclListDetails[i].transMode === "4") {
+                        tableContent += "Ship";
+                    }
+                    else if (VehiclListDetails[i].transMode === "5") {
+                        tableContent += "In Transit";
+                    }
+                    else {
+                        tableContent += "NA";
+                    }
+                    `</td >`;
+
+                    tableContent += `
+                                        <td>` + VehiclListDetails[i].vehicleNo + `</td>
+                                        <td>` + VehiclListDetails[i].fromPlace + `</td>
+                                        <td>` + VehiclListDetails[i].enteredDate + `</td>
+                                        <td>` + VehiclListDetails[i].userGSTINTransin + `</td>
+                                        <td> - </td>
+                                        <td> - </td>
+                                    </tr>`
+                }
+            } + `
+                        </tbody>
+                    </table>
+                </div>`;
+            resultDiv.innerHTML += tableContent;
+        }
+        else if (EWBstatus[0].ErrorMessage) {
+            alert(EWBstatus[0].ErrorMessage)
+            resultDiv.innerHTML += "<br>Error message : " + EWBstatus[0].ErrorMessage;
+        }
+        else {
+            console.error("EWBDetails field is missing or undefined in the response.");
+        }
+    }
+    //function displayConsignmentDetails(data) {
+    //    var resultDiv = document.getElementById("result");
+    //    resultDiv.innerHTML = ""; // Clear previous results
+    //    resultDiv.style.width = "950px";
+
+    //    // format the data for display
+    //    console.log(data);
+    //    var ewaybillData = JSON.parse(data);
+    //    var ewaybillDetails = JSON.parse(ewaybillData);
+    //    var ewaybill_itemDetail = JSON.parse(ewaybillDetails);
+    //    var ewaybill_VehiclListDetails = JSON.parse(ewaybill_itemDetail);
+
+    //    //console.log(ewaybillData);
+    //    //console.log(ewaybillDetails);
+    //    //console.log( ewaybill_itemDetail);
+    //    //console.log(ewaybill_VehiclListDetails);
+    //    //var cnmtDetail = JSON.parse(data.Value).cnmtDetail;
+    //    //var movementDetail = JSON.parse(data.Value).movementDetail;
+    //    //var vehicleHireDetail = JSON.parse(data.Value).Table5;
+    //    //console.log(movementDetail)
+    //    // Display EWAY-BILL details
+
+    //    resultDiv.innerHTML += "<table class='table table-hover table-sm table-responsive'> <thead> <tr> <th scope='col'>EWayBill No</th> <th scope='col'>To Date</th>  <th scope='col'>Status</th><th scope='col'>GSTIN</th>  </tr> </thead> <tbody> <tr> <td scope='row'>" + ewaybillData[0].EWayBill + "</td> <td>" + ewaybillData[0].Date + "</td> <td> " + ewaybillData[0].IsSuccess + " </td> <td> " + ewaybillData[0].GSTIN + " </td>  </tr> </tbody> </table>";
+    //    //resultDiv.innerHTML += "<table class='table table-hover table-sm table-responsive'><thead><tr><th scope='col'>TO TRD NAME</th> </tr> </thead><tbody><tr> <td scope='row'>" + ewaybillDetails[0].toTrdName + "</td>  </tr> </tbody> </table>"
+    //    //resultDiv.innerHTML += "<table class='table table-hover table-sm table-responsive'> <thead> <tr> <th scope='col'>EWayBill No</th> <th scope='col'>To Date</th>  <th scope='col'>Valid Upto</th><th scope='col'>Generated By</th>  </tr> </thead> <tbody> <tr> <td scope='row'>" + cnmtDetail[0].EWayBill + "</td> <td>" + cnmtDetail[0].docDate + "</td> <td> " + cnmtDetail[0].validUpto + " </td> <td> " + cnmtDetail[0].fromTrdName + " </td>  </tr> </tbody> <tbody> <tr> <td colspan='2' scope='row'> <b> From </b> <br>" + cnmtDetail[0].CONSIGNOR + "<br>" + cnmtDetail[0].FROMSTATION + "</td> <td colspan='2'> <b> To </b> <br>" + cnmtDetail[0].CONSIGNEE + "<br>" + cnmtDetail[0].TOSTATION + "</td> </tr> <tr> <td colspan='4'><b>Statuts : </b>" + cnmtDetail[0].STATUS + "</td> </tr> </tbody> </table>";
+
+
+    //}
+</script>
+
+<script>
+    document.getElementById('stateSelect').addEventListener('change', function () {
+        var selectedState = this.value;
+        var relatedFields = document.getElementById('relatedFields');
+
+        // Reset the fields
+        //document.getElementById('UsernameInput').value = '';
+        //document.getElementById('PaswrdInput').value = '';
+        //document.getElementById('GstnoInput').value = '';
+        if (selectedState) {
+            // Show the related fields
+            relatedFields.classList.remove('hidden');
+
+            // Customize fields based on the selected state (this is a basic example)
+            switch (selectedState) {
+                case 'Maharashtra':
+                    document.getElementById('UsernameInput').value = 'mahalakshm_API_PG';
+                    document.getElementById('PaswrdInput').value = 'Admin@5303';
+                    document.getElementById('GstnoInput').value = '27AADCM8862E1Z9';
+
+                    break;
+                case 'Test':
+                    // For testing
+                    document.getElementById('UsernameInput').value = '05AAACD5767E1ZT';
+                    document.getElementById('PaswrdInput').value = 'abc123@@';
+                    document.getElementById('GstnoInput').value = '05AAACD5767E1ZT';
+                    break;
+                case 'Uttarakhand':
+                    document.getElementById('UsernameInput').value = 'MLPL@mlpl_API_ml';
+                    document.getElementById('PaswrdInput').value = 'Dinesh@123';
+                    document.getElementById('GstnoInput').value = '05AADCM8862E1ZF';
+
+                    break;
+                case 'Karnataka':
+                    document.getElementById('UsernameInput').value = 'mahalakshm_API_PB';
+                    document.getElementById('PaswrdInput').value = 'Admin@5303';
+                    document.getElementById('GstnoInput').value = '29AADCM8862E1Z5';
+
+                    break;
+                case 'Haryana':
+                    document.getElementById('UsernameInput').value = 'mahalakshm_API_pkg';
+                    document.getElementById('PaswrdInput').value = 'Admin@5303';
+                    document.getElementById('GstnoInput').value = '06AADCM8862E1ZD';
+
+                    break;
+                case 'Madhya-Pradesh':
+                    document.getElementById('UsernameInput').value = 'mahalakshm_API_ml';
+                    document.getElementById('PaswrdInput').value = 'Admin@5303';
+                    document.getElementById('GstnoInput').value = '23AADCM8862E1ZH';
+
+                    break;
+                case 'Tamil Nadu':
+                    document.getElementById('UsernameInput').value = 'mahalakshm_API_HR';
+                    document.getElementById('PaswrdInput').value = 'Admin@5303';
+                    document.getElementById('GstnoInput').value = '33AADCM8862E1ZG';
+
+                    break;
+                case 'Punjab':
+                    document.getElementById('UsernameInput').value = 'ML_pkg';
+                    document.getElementById('PaswrdInput').value = 'Admin@5303';
+                    document.getElementById('GstnoInput').value = '03AADCM8862E1ZJ';
+
+                    break;
+                case 'West Bengal':
+                    document.getElementById('UsernameInput').value = 'kktmahalak_API_pkg';
+                    document.getElementById('PaswrdInput').value = 'Admin@5303';
+                    document.getElementById('GstnoInput').value = '19AADCM8862E1Z6';
+
+                    break;
+                case 'Telangana':
+                    document.getElementById('UsernameInput').value = 'mahalakshm_API_MP';
+                    document.getElementById('PaswrdInput').value = 'Dinesh@123';
+                    document.getElementById('GstnoInput').value = '36AADCM8862E1ZA';
+
+                    break;
+                case 'Rajasthan':
+                    document.getElementById('UsernameInput').value = 'mahalakshm_API_PG';
+                    document.getElementById('PaswrdInput').value = 'Admin@5303';
+                    document.getElementById('GstnoInput').value = '08AADCM8862E1Z9';
+
+                    break;
+                case 'Uttar Pradesh':
+                    document.getElementById('UsernameInput').value = 'mahalakshm_API_PG';
+                    document.getElementById('PaswrdInput').value = 'Admin@5303';
+                    document.getElementById('GstnoInput').value = '09AADCM8862E1Z7';
+
+                    break;
+                case 'Rajasthan':
+                    document.getElementById('UsernameInput').value = 'API_pkg_ml';
+                    document.getElementById('PaswrdInput').value = 'Admin@5303';
+                    document.getElementById('GstnoInput').value = '08AADCM8862E1Z9';
+
+                    break;
+                case 'Gujarat':
+                    document.getElementById('UsernameInput').value = 'mahalakshm_API_PK';
+                    document.getElementById('PaswrdInput').value = 'Admin@5303';
+                    document.getElementById('GstnoInput').value = '24AADCM8862E1ZF';
+
+                    break;
+                case 'Delhi':
+                    document.getElementById('UsernameInput').value = 'API_ml_pkg';
+                    document.getElementById('PaswrdInput').value = 'Admin@5303';
+                    document.getElementById('GstnoInput').value = '07AADCM8862E1ZB';
+                    break;
+            }
+        } else {
+            // Hide the related fields if no state is selected
+            relatedFields.classList.add('hidden');
+        }
+    });
+    function generatePDF() {
+        // Create a new jsPDF instance
+        var doc = new jsPDF();
+
+        // Get the selected area (in this case, the table)
+        var table = document.getElementById('myTable');
+
+        // Convert the selected area (table) to a data URL
+        var tableDataURL = tableToDataURL(table);
+
+        // Add the selected area (table) as an image in the PDF
+        doc.addImage(tableDataURL, 'JPEG', 10, 10, 180, 180);
+
+        // Save or download the PDF
+        doc.save('table.pdf');
+    }
+
+    // Function to convert table to data URL
+    function tableToDataURL(table) {
+        // Create a new canvas element
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+
+        // Set canvas size to match table size
+        canvas.width = table.offsetWidth;
+        canvas.height = table.offsetHeight;
+
+        // Draw the table content on the canvas
+        ctx.drawImage(table, 0, 0);
+
+        // Convert canvas to data URL
+        var dataURL = canvas.toDataURL('image/jpeg');
+
+        return dataURL;
+    }
+</script>
